@@ -1,0 +1,512 @@
+html {
+    min-width: 300px;
+    min-height: 600px;
+}
+@font-face {
+    font-family: Exo-2;
+    src: url(/Resources/fonts/exo2-regular.ttf);
+}
+#go-sidebar * {
+    all: initial;
+    font-family: Exo-2;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+#go-sidebar input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    box-sizing: border-box;
+    margin-right: 5px;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+#go-sidebar div.form {
+    width: 300px;
+    height: 600px;
+    position: relative;
+}
+
+#go-sidebar div.form p {
+    position: absolute;
+    bottom: 16%;
+    left: 135px;
+    display: block;
+}
+
+#go-sidebar #logo {
+    position:absolute;
+    top: 6%;
+    left: 28%;
+    display: block;
+}
+
+#go-sidebar #form-heading {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    display: block;
+    font-size: 19px;
+}
+#go-sidebar button.log-in-button:active {
+   background-color: #1c1b4d;
+    color: #fdfdfe;
+}
+#go-sidebar button.log-in-button:hover {
+   background-color: #4399c8;
+    color: #fdfdfe;
+    border:1px solid #596af4;
+}
+#go-sidebar button.log-in-button {
+    width: 250px;
+    position: absolute;
+    bottom: 148px;
+    left: 10px;
+    border:1px solid black;
+    font-weight: bold;
+}
+#go-sidebar button.register-button:active {
+    background-color: #1c1b4d;
+}
+#go-sidebar button.register-button:hover {
+    background-color: #4399c8;
+}
+#go-sidebar button.register-button {
+    width: 250px;
+    position: absolute;
+    bottom: 67px;
+    left:10px;
+    background-color: #46c5f4;
+    color: #fdfdfe;
+}
+#go-sidebar #forgot-password:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#go-sidebar #forgot-password {
+    position: absolute;
+    bottom: 2%;
+    left: 34%;
+    color: #46c5f4;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#go-sidebar div.feed{
+    width: 450px;
+    height: 600px;
+    position: relative;
+}
+
+#go-sidebar div.header{
+    position: absolute;
+    width: 100%;
+    height: 11%;
+    background-color: #3ec7ee;
+}
+#go-sidebar div.header img {
+    position: absolute;
+    top: 15%;
+}
+
+#go-sidebar div.header img:hover {
+    cursor: pointer;
+}
+
+#go-sidebar div.chatScreen {
+    position: absolute;
+    width: 100%;
+    top: 11%;
+    height: 89%;
+    background-color: #edf3f8;
+}
+#go-sidebar div.chatScreen > img#noteIcon {
+    position: absolute;
+    top: 22%;
+    left: 32%;
+}
+
+#go-sidebar div.chatScreen div#emptyChat {
+    position: absolute;
+    text-align: center;
+    top: 47%;
+    left: 16%;
+    color: #2a2e43;
+}
+
+#go-sidebar div.chatScreen div#addButtons {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    height: 12%;
+    background-color: #fcfcfd;
+}
+
+#go-sidebar div.chatScreen div#addButtons button{
+    position: absolute;
+    width:34%;
+    border-radius: 24px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 9px 10px 0 #d1d1d1;
+}
+
+#go-sidebar div.chatScreen div#addButtons button p{
+    font-size: 13px;
+    color: #3d4154;
+    font-weight: bold;
+    position: absolute;
+    top: 17%;
+    left: 33%;
+}
+#go-sidebar div.chatScreen div#addButtons button p:hover{
+    cursor: pointer;
+}
+#go-sidebar div.chatScreen div#addButtons button img{
+    position: absolute;
+    top: 18%;
+    left: 10%;
+}
+#go-sidebar div.chatScreen div#addButtons button img:hover{
+    cursor: pointer;
+}
+
+#go-sidebar div.chatScreen div#addButtons button#addDiscussion{
+    top:2%;
+    left: 5%;
+}
+
+#go-sidebar div.chatScreen div#addButtons button#addPortal{
+    top:2%;
+    left: 55%;
+}
+
+#go-sidebar div.chatScreen div#chatFilter button{
+    position: absolute;
+    width: 44%;
+    height: 80%;
+    text-align: center;
+    background-color: #fcfcfd;
+    border-bottom: 10px solid #fcfcfd;
+    transition: 0.4s border-bottom;
+}
+
+#go-sidebar div.chatScreen div#chatFilter button:hover,
+#go-sidebar div.chatScreen div#chatFilter button p:hover {
+    cursor: pointer;
+}
+
+#go-sidebar div.chatScreen div#chatFilter button p{
+    position: absolute;
+    color: #31b7d9;
+    top:29%;
+    left:30%;
+}
+
+#go-sidebar div.chatScreen div#chatFilter button#mostRecent{
+    left:50%;
+}
+
+#go-sidebar div.chatScreen div#chatFilter  {
+    position: absolute;
+    width: 100%;
+    height: 10%;
+}
+
+#go-sidebar div.chatScreen div#chatList {
+    position: absolute;
+    width: 100%;
+    height: 74%;
+    top: 11%;
+    background-color: #fcfcfd;
+    overflow-y:auto;
+    max-height:	100%;
+    padding-top: 15px;
+}
+
+#go-sidebar div.settingsScreen{
+    position: absolute;
+    width: 100%;
+    top: 11%;
+    height: 89%;
+}
+#go-sidebar div.settingsScreen div.profilePic{
+    position: absolute;
+    width: 100%;
+    height: 25%;
+    background-color: #edf3f8;
+    border-bottom: 1px solid #cbcbcb;
+}
+#go-sidebar div.settingsScreen div.profilePic p{
+    font-weight: bold;
+    position: absolute;
+    left:40%;
+    top:75%;
+}
+#go-sidebar #userProfilePic{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 7px;
+    top: 23%;
+    left: 43%;
+}
+#go-sidebar div.settingsScreen div.settingOptions {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 25%;
+}
+
+#go-sidebar div.settingsScreen div.settingOptions > div {
+    position: absolute;
+    width: 100%;
+    height: 33%;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+#go-sidebar div.settingsScreen div.settingOptions div.notificationSett {
+    top: 0;
+}
+
+#go-sidebar div.settingsScreen div.settingOptions p {
+    position: absolute;
+    color: #4f4f4f;
+    top: 35%;
+    padding-left: 25px;
+}
+#go-sidebar div.settingsScreen div.settingOptions div.signoutSett>p {
+    color: #ea5256;
+}
+#go-sidebar div.settingsScreen div.settingOptions div.signoutSett>p:hover {
+    color: #a43f42;
+    cursor: pointer;
+}
+
+#go-sidebar div.settingsScreen div.settingOptions div.quickButtSett {
+    top: 33%;
+}
+
+#go-sidebar div.settingsScreen div.settingOptions div.signoutSett {
+    top: 66%;
+}
+
+
+#go-sidebar #chat{
+    left: 15%;
+}
+#go-sidebar #notif{
+    left: 45%;
+}
+#go-sidebar #settings{
+    left: 75%;
+}
+
+#go-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2147483647;
+    background-color: #ffffff;
+    color: black;
+    border-left: 1px solid #eee;
+    box-shadow: -1px -1px 9px rgba(0,0,0,0.1);
+    font-size: 100%;
+}
+
+#go-sidebar div {
+    display: block;
+}
+
+#go-sidebar input {
+    background: #f8f8f8;
+    border-radius: 5px;
+}
+#go-sidebar input[type="text"] {
+    margin-bottom: -1px;
+    position: absolute;
+    left: 59px;
+    top: 23%;
+    width: 71%;
+    text-align: left;
+    font-size: 14px;
+}
+#go-sidebar input[type="email"]:hover {
+    cursor:text;
+}
+#go-sidebar input[type="email"]:focus {
+    border:solid 2px #46c5f4;
+}
+#go-sidebar input[type="email"] {
+    transition: border 0.4s ease;
+    margin-bottom: -1px;
+    border:2px solid #d4d4d4;
+    padding: 6px 14px;
+    position: absolute;
+    left: 10px;
+    top: 36%;
+    width: 250px;
+    height: 35px;
+    text-align: left;
+    font-size: 14px;
+}
+#go-sidebar input[type="password"]:hover {
+    cursor:text;
+}
+#go-sidebar input[type="password"]:focus {
+    border:solid 2px  #46c5f4;
+}
+#go-sidebar input[type="password"] {
+    transition: border 0.4s ease;
+    margin-bottom: 10px;
+    border:2px solid #d4d4d4;
+    padding: 6px 14px;
+    position: absolute;
+    left: 10px;
+    text-align: left;
+    font-size: 14px;
+    top: 48%;
+    width: 250px;
+    height: 35px;
+}
+#go-sidebar img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#go-sidebar .switch {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    left: 75%;
+    top: 25%;
+}
+
+#go-sidebar .switch input {display:none;}
+
+#go-sidebar .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#go-sidebar .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#go-sidebar input:checked + .slider {
+    background-color: #3ec7ee;
+}
+
+#go-sidebar input:focus + .slider {
+    box-shadow: 0 0 1px #3ec7ee;
+}
+
+#go-sidebar input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+#go-sidebar .slider.round {
+    border-radius: 34px;
+}
+
+#go-sidebar .slider.round:before {
+    border-radius: 50%;
+}
+
+@-webkit-keyframes slide {
+    100% { right: 0; }
+}
+
+@keyframes slide {
+    100% { right: 0; }
+}
+
+@-webkit-keyframes slideBack {
+    0% { right: 0 }
+    100% { right: -300px; }
+}
+
+@keyframes slideBack {
+    0% { right: 0 }
+    100% { right: -300px; }
+}
+
+#go-sidebar button:hover {
+    cursor:pointer;
+}
+
+#go-sidebar button {
+    transition: background-color 0.4s ease, color 0.4s ease;
+    background-color: #fbfffe;
+    border: none;
+    color: #000000;
+    height: 35px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    padding: 6px 14px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+#go-sidebar p {
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+#go-sidebar h1 {
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 50px;
+    letter-spacing: -50%;
+}
+
+#go-sidebar h2 {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: -50%;
+}
+
+#go-sidebar h3 {
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: -50%;
+
+}
+
+#go-sidebar h4 {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -50%;
+
+}
+
+#go-sidebar h5 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -25%;
+
+}

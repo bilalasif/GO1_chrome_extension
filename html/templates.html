@@ -1,0 +1,122 @@
+<script type="text/x-template" id="go-feed">
+    <div class="feed" v-if="feed.active">
+        <go-header v-bind:feed="feed"></go-header>
+        <div class="chatScreen" v-if="feed.screens.chat.active">
+            <go-chat v-bind:feed="feed"></go-chat>
+        </div>
+
+        <div class="notifScreen" v-if="feed.screens.notif.active">
+        </div>
+
+        <div class="settingsScreen" v-if="feed.screens.settings.active">
+            <go-settings></go-settings>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-header">
+    <div class="header">
+        <template v-if="feed.screens.chat.active">
+            <img id="chat" v-on:click="changeScreen" src="/Resources/images/chat_active.png">
+            <img id="notif" v-on:click="changeScreen" src="/Resources/images/bell_inactive.png">
+            <img id="settings" v-on:click="changeScreen" src="/Resources/images/settings_inactive.PNG">
+        </template>
+
+        <template v-if="feed.screens.notif.active">
+            <img id="chat" v-on:click="changeScreen" src="/Resources/images/chat_inactive.png">
+            <img id="notif" v-on:click="changeScreen" src="/Resources/images/bell_active.png">
+            <img id="settings" v-on:click="changeScreen" src="/Resources/images/settings_inactive.PNG">
+        </template>
+
+        <template v-if="feed.screens.settings.active">
+            <img id="chat" v-on:click="changeScreen" src="/Resources/images/chat_inactive.png">
+            <img id="notif" v-on:click="changeScreen" src="/Resources/images/bell_inactive.png">
+            <img id="settings" v-on:click="changeScreen" src="/Resources/images/settings_active.PNG">
+        </template>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-footer">
+    <div id="addButtons">
+        <button id="addDiscussion" v-on:click="addToDiscussion">
+            <img src="/Resources/images/addToDiscussion.png">
+            <p>Start a discussion</p>
+        </button>
+        <button id="addPortal" v-on:click="addToPortal">
+            <img src="/Resources/images/addToPortal.png">
+            <p>Add to portal</p>
+        </button>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-chat">
+    <template v-if="feed.screens.chat.empty">
+        <img id="noteIcon" src="/Resources/images/note-icon.png">
+        <div id="emptyChat">
+            <h5>There's No Notes on this page</h5><br/>
+            <p>Be the first one to add a note<br/> on this page by clicking on the below button<br/> or drag to choose a favourite quote on page</p>
+        </div>
+    </template>
+    <template v-else>
+        <div id="chatFilter">
+            <button id="highestRated" v-on:click="loadHighestRated">
+                <p>Highest Rated</p>
+            </button>
+            <button id="mostRecent" v-on:click="loadMostRecent">
+                <p>Most Recent</p>
+            </button>
+        </div>
+        <div id="chatList">
+
+        </div>
+    </template>
+    <go-footer></go-footer>
+</script>
+
+<script type="text/x-template" id="go-settings">
+    <div class="profilePic">
+        <img id="userProfilePic" src="/Resources/images/blank-profile-picture.png">
+        <p>User Name</p>
+    </div>
+    <div class="settingOptions">
+        <div class="notificationSett">
+            <p>Notification</p>
+            <label class="switch">
+                <input v-on:click="updateClickedSetting" type="checkbox">
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div class="quickButtSett">
+            <p>Allow quick button</p>
+            <label class="switch">
+                <input v-on:click="updateClickedSetting" type="checkbox">
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div class="signoutSett">
+            <p v-on:click="signOut">Sign Out</p>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-login-form">
+    <div class="form" v-if="form">
+        <img id="logo" src="/Resources/images/go1.PNG">
+        <h2 id="form-heading">Sign In to GO1</h2>
+        <div>
+            <input v-model="emailId" type="email" id="email" class="form-control" placeholder="Email" required="" autofocus>
+            <input v-model="pwd" type="password" id="password" class="form-control" placeholder="Password" required="">
+            <button class="log-in-button" v-on:click="submitLogin">Log In</button>
+            <p>Or</p>
+            <button class="register-button" v-on:click="gotoRegister">Register</button>
+            <p id="forgot-password" v-on:click="forgotPassword">Forget Password?</p>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-root">
+    <div id="go-sidebar">
+        <log-in-form v-bind:form="form"></log-in-form>
+        <go-feed v-bind:feed="feed"></go-feed>
+    </div>
+</script>

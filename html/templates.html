@@ -49,6 +49,19 @@
     </div>
 </script>
 
+<script type="text/x-template" id="go-chat-box">
+    <ul>
+        <li v-for="chat in feed.screens.chat.chatList">
+            <div id="chatBox">
+                <img v-bind:src=chat.latestComment.profilePic>
+                <h5>{{ chat.topicName }}</h5><br/>
+                <p id="Comment">{{chat.latestComment.profileName}} : {{chat.latestComment.comment}}</p><br/>
+                <p id="added">{{ chat.added }}</p>
+            </div>
+        </li>
+    </ul>
+</script>
+
 <script type="text/x-template" id="go-chat">
     <template v-if="feed.screens.chat.empty">
         <img id="noteIcon" src="/Resources/images/note-icon.png">
@@ -67,7 +80,7 @@
             </button>
         </div>
         <div id="chatList">
-
+            <go-chat-box v-bind:feed="feed"></go-chat-box>
         </div>
     </template>
     <go-footer></go-footer>

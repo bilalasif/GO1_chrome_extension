@@ -43,6 +43,12 @@ if(typeof Sidebar !== 'function'){
 					}
 				}
 			});
+			this.Vue.component('go-chat-box',{
+				template: '#go-chat-box',
+				props:[
+					'feed'
+				]
+			});
 
 			this.Vue.component('go-footer',{
 				template: '#go-footer',
@@ -66,11 +72,17 @@ if(typeof Sidebar !== 'function'){
 					},
 					loadHighestRated: function() {
 						self.document.getElementById("highestRated").style['border-bottom'] = '10px solid #31b7d9';
+						self.document.getElementById("highestRated").getElementsByTagName("p")[0].style['color'] = '#31b7d9';
 						self.document.getElementById("mostRecent").style['border-bottom'] = '10px solid #fcfcfd';
+						self.document.getElementById("mostRecent").getElementsByTagName("p")[0].style['color'] = '#727272';
+						this.$dispatch('updateHighestRated');
 					},
 					loadMostRecent: function(){
 						self.document.getElementById("mostRecent").style['border-bottom'] = '10px solid #31b7d9';
+						self.document.getElementById("mostRecent").getElementsByTagName("p")[0].style['color'] = '#31b7d9';
 						self.document.getElementById("highestRated").style['border-bottom'] = '10px solid #fcfcfd';
+						self.document.getElementById("highestRated").getElementsByTagName("p")[0].style['color'] = '#727272';
+						this.$dispatch('updateMostRecent');
 					}
 				},
 				ready: function(){
@@ -118,7 +130,7 @@ if(typeof Sidebar !== 'function'){
 					}
 				}
 			});
-			var app = new this.Vue({
+			return new this.Vue({
 				el: sidebarEl,
 				template: '#go-root',
 				data: {
@@ -152,6 +164,53 @@ if(typeof Sidebar !== 'function'){
 					}
 				},
 				events:{
+					updateHighestRated: function(){
+						//update from api
+						this.feed.screens.chat.chatList .push({
+								topicName: "Animation Course Idea",
+								topicId : '2b',
+								added: '2 days ago',
+								latestComment: {
+									profilePic : "/Resources/images/blank-profile-picture.png",
+									profileName: "Peter Parker",
+									comment: "Yeah I think its a great idea and we should gt right on it."
+								}
+							},
+							{
+								topicName: "This could be topic for new LI",
+								topicId : '2d',
+								added: '2 days ago',
+								latestComment: {
+									profilePic : "/Resources/images/blank-profile-picture.png",
+									profileName: "Samantha Berry",
+									comment: "Why do you think so?"
+								}
+							});
+					},
+					updateMostRecent: function(){
+						//update from api
+						this.feed.screens.chat.chatList = [
+							{
+								topicName: "This could be topic for new LI",
+								topicId : '2d',
+								added: '2 days ago',
+								latestComment: {
+									profilePic : "/Resources/images/blank-profile-picture.png",
+									profileName: "Samantha Berry",
+									comment: "Why do you think so?"
+								}
+							},
+							{
+							topicName: "Animation Course Idea",
+							topicId : '2b',
+							added: '2 days ago',
+							latestComment: {
+								profilePic : "/Resources/images/blank-profile-picture.png",
+								profileName: "Peter Parker",
+								comment: "Yeah I think its a great idea and we should gt right on it."
+							}
+						}];
+					},
 					changeFeedScreen: function(screenId){
 						var vueInstance = this;
 						if(vueInstance.feed){
@@ -167,7 +226,6 @@ if(typeof Sidebar !== 'function'){
 					this.adjustPopupDimension();
 				}
 			});
-			return app;
 		}
 	}
 }

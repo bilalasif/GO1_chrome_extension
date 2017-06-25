@@ -1,17 +1,19 @@
 <script type="text/x-template" id="go-feed">
-    <div class="feed" v-if="feed.active">
+
+    <div class="feed">
         <go-header v-bind:feed="feed"></go-header>
-        <div class="chatScreen" v-if="feed.screens.chat.active">
+        <div class="chatScreen" v-if="feed.screens.chat.active" transition="fade">
             <go-chat v-bind:feed="feed"></go-chat>
         </div>
 
-        <div class="notifScreen" v-if="feed.screens.notif.active">
+        <div class="notifScreen" v-if="feed.screens.notif.active" transition="fade">
         </div>
 
         <div class="settingsScreen" v-if="feed.screens.settings.active">
             <go-settings></go-settings>
         </div>
     </div>
+
 </script>
 
 <script type="text/x-template" id="go-header">
@@ -113,13 +115,16 @@
 </script>
 
 <script type="text/x-template" id="go-login-form">
-    <div class="form" v-if="form">
+    <div class="form">
         <img id="logo" src="/Resources/images/go1.PNG">
         <h2 id="form-heading">Sign In to GO1</h2>
         <div>
-            <input v-model="emailId" type="email" id="email" class="form-control" placeholder="Email" required="" autofocus>
-            <input v-model="pwd" type="password" id="password" class="form-control" placeholder="Password" required="">
-            <button class="log-in-button" v-on:click="submitLogin">Log In</button>
+            <form action="javascript:void(0);">
+                <input v-model="form.emailId" type="email" id="email" class="form-control" placeholder="Email" required autofocus>
+                <input v-model="form.pwd" type="password" id="password" class="form-control" placeholder="Password" required>
+                <input type="submit" class="log-in-button" v-on:click="submitLogin" value="Log In">
+            </form>
+            <p id="formError" v-if="form.formError.active">{{form.formError.text}}</p>
             <p>Or</p>
             <button class="register-button" v-on:click="gotoRegister">Register</button>
             <p id="forgot-password" v-on:click="forgotPassword">Forget Password?</p>
@@ -127,9 +132,64 @@
     </div>
 </script>
 
+<script type="text/x-template" id="go-discussion">
+    <div id="discussion">
+        <go-start-discussion v-bind:discussion="discussion" v-if="discussion.start.active"></go-start-discussion>
+        <go-continue-discussion v-bind:discussion="discussion" v-if="discussion.continue.active"></go-continue-discussion>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-start-discussion">
+    <div id="startDiscussion">
+        <div class="discussionHeader">
+            <img v-on:click="backToFeed" id="back" src="/Resources/images/backArrow.png">
+            <h5>START DISCUSSION</h5>
+            <img v-on:click="openDiscussionSettings" id="discussionSettings" src="/Resources/images/settings_dark.png">
+        </div>
+        <div class="discussionTopic">
+            <input id="topic" placeholder="Discussion Topic" v-model="discussion.start.topic.heading">
+        </div>
+        <div id="note" v-if="discussion.start.note.active">
+            <p>{{discussion.start.note.text}}</p>
+        </div>
+        <div id="webLink" v-if="discussion.start.webLink.active" v-bind:style="discussion.start.style.weblink">
+            <p>Related to:</p>
+            <div id="metaData">
+                <img v-bind:src="discussion.start.webLink.imgSrc">
+                <h4>{{discussion.start.webLink.title}}</h4>
+                <p>{{discussion.start.webLink.desc}}</p>
+            </div>
+        </div>
+        <div id="topicDescription" v-bind:style="discussion.start.style.topic">
+            <textarea placeholder="Say something about this page" v-model="discussion.start.topic.detail"></textarea>
+        </div>
+        <div id="discussionFooter">
+            <select>
+                <option>My connections</option>
+            </select>
+            <button v-on:click="addDiscussion">Start Discussion</button>
+            <div id="linkPageDiv">
+                <input v-on:click="addRemoveWebLink" id="linkPage" type="checkbox">
+                <label for="linkPage">Link to this page</label>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="go-continue-discussion">
+    <div id="continueDiscussion">
+        <div class="discussionHeader">
+            <img v-on:click="backToFeed" id="back" src="/Resources/images/backArrow.png">
+            <h5>DISCUSSION</h5>
+            <img v-on:click="openDiscussionSettings" id="discussionSettings" src="/Resources/images/settings_dark.png">
+        </div>
+    </div>
+</script>
+
 <script type="text/x-template" id="go-root">
     <div id="go-sidebar">
-        <log-in-form v-bind:form="form"></log-in-form>
-        <go-feed v-bind:feed="feed"></go-feed>
+        <log-in-form v-bind:form="form"  v-if="form.active"></log-in-form>
+        <go-feed v-bind:feed="feed" v-if="feed.active"></go-feed>
+        <go-discussion v-bind:discussion="discussion" v-if="discussion.active"></go-discussion>
     </div>
 </script>

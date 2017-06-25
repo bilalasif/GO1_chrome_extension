@@ -1,0 +1,60 @@
+span.createNote {
+    display: inline;
+    position:absolute;
+    opacity: 0;
+    width:150px;
+    height: 150px;
+    transition: 0.5s opacity;
+}
+
+span.createNote div.noteWrapper {
+    position:relative;
+    width:90%;
+    height: 65%;
+}
+
+span.createNote div.noteWrapper div.createNoteButton {
+    position:absolute;
+    width:100%;
+    height: 50%;
+    background-color: #061626;
+    color: white;
+}
+span.createNote div.noteWrapper div.createNoteButton *{
+    position:absolute;
+}
+
+span.createNote div.noteWrapper div.createNoteButton,
+span.createNote div.noteWrapper div.createNoteButton *:hover{
+    cursor:pointer;
+}
+
+span.createNote div.noteWrapper div.createNoteButton img{
+    top: 10px;
+    left: 8px;
+}
+
+span.createNote div.noteWrapper div.createNoteButton p{
+    top: 17px;
+    left: 45px;
+}
+span.createNote div.noteWrapper div.createNoteButton.public{
+    top:0;
+    left:0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+span.createNote div.noteWrapper div.createNoteButton.private{
+    top: 50%;
+    left: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+span.selectedText {
+    display: inline;
+    background-color: blue;
+    color: white;
+}
+span.selectedText.highlight {
+    background-color: yellow;
+}

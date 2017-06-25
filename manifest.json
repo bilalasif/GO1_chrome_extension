@@ -1,6 +1,6 @@
 {
-  "name": "GO",
-  "version": "0.0.2",
+  "name": "GO1",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "",
   "icons": {
@@ -12,20 +12,29 @@
       "19" : "Resources/images/icon_extension_inactive_19.png",
       "32" : "Resources/images/icon_extension_inactive_32.png"
     },
-    "default_title": "GO"
+    "default_title": "GO1",
+    "default_popup": "/html/popup.html"
   },
-
-  "background": {
-    "scripts": [
-      "scripts/App.js"
-    ]
-  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "scripts/contentApp.js"
+      ],
+      "css": [
+        "stylesheets/contentStyle.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
   "web_accessible_resources": [
     "node_modules/*",
     "html/*",
     "Resources/*"
   ],
   "permissions": [
+    "storage",
     "tabs",
     "https://*/*",
     "http://*/*",

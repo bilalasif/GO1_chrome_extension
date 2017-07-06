@@ -10,7 +10,7 @@
         </div>
 
         <div class="settingsScreen" v-if="feed.screens.settings.active">
-            <go-settings></go-settings>
+            <go-settings v-bind:user="user"></go-settings>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
 <script type="text/x-template" id="go-chat-box">
     <ul>
         <li v-for="chat in feed.screens.chat.chatList">
-            <div id="chatBox">
+            <div id="chatBox" v-bind:topic-id=chat.topicId v-on:click="loadDiscussion">
                 <img v-bind:src=chat.latestComment.profilePic>
                 <h5>{{ chat.topicName }}</h5><br/>
                 <p id="Comment">{{chat.latestComment.profileName}} : {{chat.latestComment.comment}}</p><br/>
@@ -90,8 +90,8 @@
 
 <script type="text/x-template" id="go-settings">
     <div class="profilePic">
-        <img id="userProfilePic" src="/Resources/images/blank-profile-picture.png">
-        <p>User Name</p>
+        <img id="userProfilePic" v-bind:src=user.profilePicSrc>
+        <div id="userName"><p>{{user.name}}</p></div>
     </div>
     <div class="settingOptions">
         <div class="notificationSett">
@@ -135,7 +135,7 @@
 <script type="text/x-template" id="go-discussion">
     <div id="discussion">
         <go-start-discussion v-bind:discussion="discussion" v-if="discussion.start.active"></go-start-discussion>
-        <go-continue-discussion v-bind:discussion="discussion" v-if="discussion.continue.active"></go-continue-discussion>
+        <go-continue-discussion v-bind:discussion="discussion" v-bind:user="user" v-if="discussion.continue.active"></go-continue-discussion>
     </div>
 </script>
 
@@ -149,10 +149,13 @@
         <div class="discussionTopic">
             <input id="topic" placeholder="Discussion Topic" v-model="discussion.start.topic.heading">
         </div>
-        <div id="note" v-if="discussion.start.note.active">
-            <p>{{discussion.start.note.text}}</p>
+        <div class="note" v-if="discussion.start.note.active">
+            <div>
+                <img src="/Resources/images/comment.png">
+                <p>{{discussion.start.note.text}}</p>
+            </div>
         </div>
-        <div id="webLink" v-if="discussion.start.webLink.active" v-bind:style="discussion.start.style.weblink">
+        <div id="webLink" v-if="discussion.start.webLink.active">
             <p>Related to:</p>
             <div id="metaData">
                 <img v-bind:src="discussion.start.webLink.imgSrc">
@@ -183,13 +186,97 @@
             <h5>DISCUSSION</h5>
             <img v-on:click="openDiscussionSettings" id="discussionSettings" src="/Resources/images/settings_dark.png">
         </div>
+        <div class="discussionTopic">
+            <h3>{{discussion.continue.topic.heading}}</h3>
+        </div>
+        <div id="discussionDetail" class="clearfix">
+            <div id="profileInfo">
+                <img id="userPic" v-bind:src="user.profilePicSrc">
+                <div id="memberInfo">
+                    <p>{{user.name}}</p>
+                </div>
+                <p>{{discussion.continue.added}}</p>
+            </div>
+            <div class="note" v-if="discussion.continue.note.active">
+                <div>
+                    <img src="/Resources/images/comment.png">
+                    <p>{{discussion.continue.note.text}}</p>
+                </div>
+            </div>
+            <div id="discussionDiv" v-bind:style="discussion.continue.style.detailText">
+                <p>{{discussion.continue.topic.detail.text}}</p>
+                <div id="showMore" v-if="discussion.continue.topic.detail.showFull" v-on:click="toggleText">
+                    <img id="arrow" v-bind:src=toggleImg>
+                </div>
+            </div>
+        </div>
+        <div id="likeReply">
+
+        </div>
+        <div id="commentArea" class="clearfix">
+            <div id="comments">
+                <div class="comment clearfix" v-for="comment in discussion.continue.comments">
+                    <div class="profileImage">
+                        <img v-bind:src="comment.imgSrc">
+                    </div>
+                    <div class="commentStruc">
+                        <div class="commentBody">
+                            <div class="commentInfo">
+                                <p class="commentatorName">{{comment.name}}</p>
+                                <div class="comentLikeReply">
+                                    <img src="/Resources/images/like_inactive.png">
+                                    <span v-on:click="replyToComment" v-bind:comment-id=comment.id>
+                                        <img src="/Resources/images/reply.png">
+                                        <p>Reply</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="commentText">
+                                <p>{{comment.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentReply">
+                        <div v-for="reply in comment.replies">
+                            <div class="profileImage">
+                                <img v-bind:src="reply.imgSrc">
+                            </div>
+                            <div class="replyStruct">
+                                <div class="replyBody">
+                                    <div class="replyInfo">
+                                        <p class="replierName">{{reply.name}}</p>
+                                        <div class="replyLike">
+                                        <span>
+                                            <img src="/Resources/images/like_inactive.png">
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="replyText">
+                                        <p>{{reply.text}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commentBox" v-if="commentReplyActive === comment.id">
+                            <input type="text" v-model="discussion.continue.inputComment.reply" placeholder="Add a reply" required>
+                            <button v-on:click="addReply" v-bind:comment-id=comment.id v-bind:topic-id="discussion.continue.topic.id">Post</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="commentBox">
+                <input type="text" v-model="discussion.continue.inputComment.mainComment" placeholder="Add a reply" required>
+                <button v-on:click="addComment" v-bind:topic-id="discussion.continue.topic.id">Post</button>
+            </div>
+        </div>
     </div>
 </script>
 
 <script type="text/x-template" id="go-root">
     <div id="go-sidebar">
-        <log-in-form v-bind:form="form"  v-if="form.active"></log-in-form>
-        <go-feed v-bind:feed="feed" v-if="feed.active"></go-feed>
-        <go-discussion v-bind:discussion="discussion" v-if="discussion.active"></go-discussion>
+        <go-log-in-form v-bind:form="form"  v-if="form.active"></go-log-in-form>
+        <go-feed v-bind:feed="feed" v-bind:user="user" v-if="feed.active"></go-feed>
+        <go-discussion v-bind:discussion="discussion" v-bind:user="user" v-if="discussion.active"></go-discussion>
     </div>
 </script>

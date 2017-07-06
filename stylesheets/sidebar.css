@@ -35,7 +35,7 @@ html {
 
 #go-sidebar div.form p {
     position: absolute;
-    bottom: 16%;
+    bottom: 20%;
     left: 135px;
     display: block;
 }
@@ -300,11 +300,15 @@ html {
     background-color: #edf3f8;
     border-bottom: 1px solid #cbcbcb;
 }
-#go-sidebar div.settingsScreen div.profilePic p{
-    font-weight: bold;
+#go-sidebar div.settingsScreen div.profilePic div#userName{
     position: absolute;
-    left:40%;
+    width: 100%;
+    height:24%;
     top:75%;
+    text-align: center;
+}
+#go-sidebar div.settingsScreen div.profilePic div#userName p {
+    font-weight: bold;
 }
 #go-sidebar #userProfilePic{
     position: absolute;
@@ -382,17 +386,16 @@ html {
 }
 
 #go-sidebar div#discussion div#startDiscussion input#topic {
-    width: 100%;
-    height: 100%;
-    padding-left: 6%;
+    width: inherit;
+    height: 87%;
     background-color: #fdfdfe;
-    border-bottom: 1px solid #d1d1d1;
+
 }
 
 #go-sidebar div#discussion div#startDiscussion div#topicDescription textarea{
-    width:100%;
-    height: 100%;
-    padding-left: 6%;
+    width: inherit;
+    height: 98%;
+    word-wrap: break-word;
 }
 
 #go-sidebar div#discussion div#startDiscussion div#topicDescription textarea::-webkit-input-placeholder{
@@ -403,23 +406,38 @@ html {
     color: #9a9a9a;
     font-size: 17px;
 }
-
-#go-sidebar div#discussion div#startDiscussion div#note {
-    top: 18%;
-    width: 84%;
-    height: 5%;
-    padding: 3% 2% 3% 4%;
-    left: 6%;
-    background-color: #faf7e2;
+#go-sidebar div#discussion div.note {
+    height: 8%;
+    padding: 1% 6% 1% 6%;
 }
-#go-sidebar div#discussion div#startDiscussion div#note > p {
+
+#go-sidebar div#discussion div.note > div {
+    background-color: #faf7e2;
+    width: 88%;
+    height: 98%;
+    border-radius: 5px;
+}
+
+#go-sidebar div#discussion div.note > div  img {
+    position: relative;
+    float: left;
+    left: 3%;
+    top: 30%;
+}
+
+#go-sidebar div#discussion div.note > div  p {
     font-size: 18px;
+    padding: 3% 1% 2% 5%;
+}
+
+#go-sidebar div#discussion div#startDiscussion div.note {
+    position: relative;
 }
 
 #go-sidebar div#discussion div#startDiscussion div#webLink {
-    top: 18%;
     width: 100%;
     height: 20%;
+    position: relative;
 }
 
 #go-sidebar div#discussion div#startDiscussion div#webLink > p{
@@ -464,9 +482,10 @@ html {
 }
 
 #go-sidebar div#discussion div#startDiscussion div#topicDescription {
-    width:100%;
+    position:relative;
+    width:88%;
     height: 60%;
-    top: 18%;
+    padding: 1% 6% 1% 6%;
 }
 
 #go-sidebar div#discussion div.discussionHeader {
@@ -474,6 +493,7 @@ html {
     height: 8%;
     border-bottom: 1px solid #d1d1d1;
     text-align: center;
+    position: relative;
 }
 
 #go-sidebar div#discussion div#discussionFooter {
@@ -543,9 +563,6 @@ html {
     letter-spacing: 0;
     font-family: Exo-2;
 }
-#go-sidebar div#discussion div#continueDiscussion div.discussionHeader > h5 {
-    left: 37%;
-}
 
 #go-sidebar div#discussion div.discussionHeader > img:hover {
     cursor: pointer;
@@ -562,15 +579,240 @@ html {
 }
 
 #go-sidebar div#discussion div.discussionTopic {
-    width: 100%;
-    top: 9%;
-    height: 8%;
+    width: 88%;
+    position: relative;
+    height: 7%;
+    border-bottom: 1px solid #d1d1d1;
+    padding: 1% 6% 1% 6%;
 }
 
 #go-sidebar div#discussion div#continueDiscussion {
     width:100%;
     height: 100%;
     background-color: #fdfdfe;
+    overflow-y: scroll;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div.discussionHeader > h5 {
+    left: 37%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div.discussionTopic  h3{
+   font-size: 19px;
+    font-weight: bold;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail {
+    width: 88%;
+    position: relative;
+    padding: 1% 6% 1% 6%;
+    top:0;
+    border-bottom: 1px solid #d1d1d1;
+}
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail div#profileInfo {
+    height: 50px;
+    position: relative;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail div#profileInfo > p {
+    right: 0;
+    top: -8px;
+    font-size: 13px;
+    color: #9b9b9b;
+
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail div#profileInfo img#userPic {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail div#profileInfo div#memberInfo {
+    width: 78%;
+    height: 85%;
+    left: 35px;
+    padding-left: 2%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDetail div#profileInfo div#memberInfo p {
+    font-size: 14px;
+    font-weight: bold;
+    top: -8px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div.note {
+    height: 55px;
+    padding: 0;
+    position: relative;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div.note > div {
+    width: 100%;
+    height: 100%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDiv {
+    height: 56px;
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDiv p {
+    font-size: 14px;
+    color: #313549;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#discussionDiv div#showMore {
+    width: 20px;
+    height: 20px;
+    bottom: -20px;
+    left: 167px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#likeReply {
+    width: 88%;
+    height: 6%;
+    position: relative;
+    padding: 1% 6% 1% 6%;
+    top: 0;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea {
+    position: relative;
+    padding: 4% 6% 1% 6%;
+    top: 0;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea * {
+    position: relative;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div#comments {
+    float: left;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.comment {
+    margin: 5px 0 0 5px;
+    width: 376px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.comment img {
+    float: left;
+    width: 35px;
+    border-radius: 5px;
+    margin-right: 6px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc > div.commentBody{
+    padding-left: 12%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo p.commentatorName {
+    font-size: 14px;
+    font-weight: bold;
+    top: -8px;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyStruct div.replyInfo div.replyLike,
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply {
+    float:right;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply>img{
+    width: 12px;
+    margin-right: 35px;
+    opacity: 0.6;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply span{
+    top: -5px;
+    display: inline-block;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply span:hover,
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply span *:hover{
+    cursor: pointer;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply span>p{
+    font-size: 13px;
+    color: #98a1a7;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentStruc div.commentInfo div.comentLikeReply span>img{
+    width:14px;
+    margin: 6px 4px 0 0;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyStruct div.replyInfo div.replyLike span>img{
+    width:12px;
+    opacity: 0.6;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentText {
+    top: -15px;
+    width: 260px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentReply {
+    padding-left: 12%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentReply div.commentBox input{
+    width: 220px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyStruct > div.replyBody{
+    padding-left: 12%;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyStruct div.replyInfo p.replierName {
+    font-size: 14px;
+    font-weight: bold;
+    top: -8px;
+}
+
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyText {
+    top: -15px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentText p,
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.replyText p{
+    font-size: 14px;
+    line-height: 20px;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentBox {
+    float: left;
+    border: 1px solid #e4e4e4;
+}
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentBox input{
+    float: left;
+    left: 0;
+    background-color: white;
+    top: 0;
+    padding: 3px 0 0 20px;
+    margin: 8px 2px 8px 2px;
+    width: 275px;
+    text-align: left;
+    font-size: 14px;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentBox button{
+    float: right;
+    padding: 4px 12px 4px 12px;
+    width:50px;
+    height: 25px;
+    margin: 3px;
+    color: white;
+    background-color: #3ec7ee;
+}
+
+#go-sidebar div#discussion div#continueDiscussion div#commentArea div.commentBox button:hover{
+    background-color: #24a8c9;
 }
 
 #go-sidebar {
@@ -742,7 +984,6 @@ html {
 #go-sidebar p {
     font-size: 16px;
     line-height: 28px;
-    margin-bottom: 20px;
 }
 
 #go-sidebar h1 {
@@ -783,6 +1024,11 @@ html {
     line-height: 28px;
     font-family: Open-Sans;
 
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s

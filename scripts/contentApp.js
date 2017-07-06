@@ -14,6 +14,10 @@ if(typeof ContentApp !== 'function'){
 	ContentApp.prototype = {
 		createNoteSpan: null,
 		rangeNodes: [],
+		imgSrc: null,
+		description: null,
+		title: null,
+
 		_initMessageListener: function(){
 			var self = this;
 			this.chrome.runtime.onMessage.addListener(function (message, sender, response) {
@@ -38,7 +42,7 @@ if(typeof ContentApp !== 'function'){
 		_initHighlightHandler: function(){
 			var self = this;
 			this.document.onmouseup = function (e) {
-				if ( !self.createNoteSpan || (self.createNoteSpan && !self.findAncestor(e.target, self.createNoteSpan))) {
+				if ( !self.createNoteSpan || (self.createNoteSpan && !(self.findAncestor(e.target, self.createNoteSpan) || e.target === self.createNoteSpan))) {
 					var selectedTextObject;
 					var selectedText;
 					if (self.window.getSelection) {
@@ -86,14 +90,14 @@ if(typeof ContentApp !== 'function'){
 			var privateNoteimg = this.document.createElement('img');
 			var publicNote = this.document.createElement('p');
 			var privateNote = this.document.createElement('p');
+			var importStyle = this.document.createElement('style');
+			importStyle.innerHTML = " @import '" + self.chrome.runtime.getURL('/stylesheets/contentStyle.css')+"'; ";
 			publicNoteimg.src = this.chrome.runtime.getURL('/Resources/images/createNote.PNG');
 			privateNoteimg.src = this.chrome.runtime.getURL('/Resources/images/createPrivateNote.PNG');
 			buttonWrapper.className = 'noteWrapper';
-			createPublicNote.className = 'createNoteButton';
-			createPublicNote.className += ' public';
+			createPublicNote.className = 'createNoteButton public clearfix';
 			publicNote.innerText = 'Create Note';
-			createPrivateNote.className = 'createNoteButton';
-			createPrivateNote.className += ' private';
+			createPrivateNote.className = 'createNoteButton  private clearfix';
 			privateNote.innerText = 'Private Note';
 			createPublicNote.appendChild(publicNoteimg);
 			createPublicNote.appendChild(publicNote);
@@ -103,11 +107,13 @@ if(typeof ContentApp !== 'function'){
 			createPrivateNote.appendChild(privateNoteimg);
 			createPrivateNote.appendChild(privateNote);
 			createPrivateNote.addEventListener('click', function(event){
-				self.chrome.storage.sync.set({'lastSelectedText':selectedText});
+				//self.chrome.storage.sync.set({'lastSelectedText':selectedText});
 			});
 			buttonWrapper.appendChild(createPublicNote);
 			buttonWrapper.appendChild(createPrivateNote);
-			this.createNoteSpan.appendChild(buttonWrapper);
+			var shadowRoot = this.createNoteSpan.attachShadow({mode: 'open'});
+			shadowRoot.innerHTML = importStyle.outerHTML;
+			shadowRoot.appendChild(buttonWrapper)
 		},
 		clearPreviousSelection: function(){
 			if(this.createNoteSpan) {
@@ -154,7 +160,6 @@ if(typeof ContentApp !== 'function'){
 		_getSafeRanges: function(dangerous) {
 			var self = this;
 			var a = dangerous.commonAncestorContainer;
-			// Starts -- Work inward from the start, selecting the largest safe range
 			var s = new Array(0), rs = new Array(0);
 			if (dangerous.startContainer != a)
 				for(var i = dangerous.startContainer; i != a; i = i.parentNode)
@@ -175,8 +180,6 @@ if(typeof ContentApp !== 'function'){
 				}
 				rs.push(xs);
 			}
-
-			// Ends -- basically the same code reversed
 			var e = new Array(0), re = new Array(0);
 			if (dangerous.endContainer != a)
 				for(var i = dangerous.endContainer; i != a; i = i.parentNode)
@@ -197,8 +200,6 @@ if(typeof ContentApp !== 'function'){
 				}
 				re.unshift(xe);
 			}
-
-			// Middle -- the uncaptured middle
 			if ((0 < s.length) && (0 < e.length)) {
 				var xm = self.document.createRange();
 				xm.setStartAfter(s[s.length - 1]);
@@ -207,42 +208,36 @@ if(typeof ContentApp !== 'function'){
 			else {
 				return [dangerous];
 			}
-
-			// Concat
 			rs.push(xm);
-			var response = rs.concat(re);
-
-			// Send to Console
-			return response;
+			return rs.concat(re);
 		},
 		getMetaContent: function(){
 			var self = this;
 			var response = arguments[1];
-			var imgSrc = '';
-			var description = '';
-			var title = '';
-			var metaTags = self.document.getElementsByTagName('meta');
-			for (var i=0; i<metaTags.length; i++) {
-				if (metaTags[i].getAttribute("property") == "og:image") {
-					imgSrc = metaTags[i].getAttribute("content");
-				}
-				if (metaTags[i].getAttribute("property") == "og:description") {
-					description = metaTags[i].getAttribute("content");
-				}
-				if (metaTags[i].getAttribute("property") == "og:title") {
-					title = metaTags[i].getAttribute("content");
+			if(!this.imgSrc && !this.description && !this.title) {
+				var metaTags = self.document.getElementsByTagName('meta');
+				for (var i = 0; i < metaTags.length; i++) {
+					if (metaTags[i].getAttribute("property") == "og:image") {
+						this.imgSrc = metaTags[i].getAttribute("content");
+					}
+					if (metaTags[i].getAttribute("property") == "og:description") {
+						this.description = metaTags[i].getAttribute("content");
+					}
+					if (metaTags[i].getAttribute("property") == "og:title") {
+						this.title = metaTags[i].getAttribute("content");
+					}
 				}
 			}
 			response({
 				url: self.window.location.href,
-				imgSrc:imgSrc||self.document.getElementsByTagName('img')[0].src,
-				desc:description||decodeURIComponent(self.document.getElementsByTagName('title')[0].innerText),
-				title:title||decodeURIComponent(self.document.getElementsByTagName('title')[0].innerText)
+				imgSrc:this.imgSrc||self.document.getElementsByTagName('img')[0].src,
+				desc:this.description||decodeURIComponent(self.document.getElementsByTagName('title')[0].innerText),
+				title:this.title||decodeURIComponent(self.document.getElementsByTagName('title')[0].innerText)
 			});
 		}
 	}
 }
-if(!window.GO){
-	window.GO = {};
+if(!window.GO1){
+	window.GO1 = {};
 }
-window.GO.backgroundApp = new ContentApp (window, document,chrome);
+window.GO1.contentApp = new ContentApp (window, document,chrome);

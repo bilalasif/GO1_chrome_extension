@@ -117,7 +117,9 @@ if(typeof ContentApp !== 'function'){
 		},
 		clearPreviousSelection: function(){
 			if(this.createNoteSpan) {
-				this.createNoteSpan.parentElement.removeChild(this.createNoteSpan);
+				if(this.createNoteSpan.parentElement){
+					this.createNoteSpan.parentElement.removeChild(this.createNoteSpan);
+				}
 				this.createNoteSpan = null;
 			}
 			if(this.rangeNodes.length > 0){
